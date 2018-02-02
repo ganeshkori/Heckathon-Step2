@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
 
     var startIndex = 0;
     this.numberOfElementsToRemove = 0;
-    if(formData.value.indicator === 1){
+    if(formData.value.indicator === 0){
       if(formData.value.direction > 0){
         this.numberOfElementsToRemove = this.columnCount - formData.value.direction;
       }
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
         this.columnLoopData.push(getData);
       }
       this.indicatorMsg = "";
-    }else if(formData.value.indicator === 0){
+    }else if(formData.value.indicator === 1){
       if(formData.value.direction > 0){
         this.numberOfElementsToRemove = this.rowCount - formData.value.direction;
       }
