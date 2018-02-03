@@ -17,26 +17,25 @@ export class AppComponent implements OnInit {
   columnCount = 5
   columnNumber = 1
   addColumnCount = 0;
-
-  indicatorMsg = "";
-
-  ngOnInit() {
-    
-  }
-
   command = false;
 
-  addRowColumn(){
-    for(this.rowNumber = 1;this.rowCount>=this.rowNumber;this.rowNumber++) {
+
+  indicatorMsg = '';
+
+  ngOnInit() { }
+
+
+  addRowColumn() {
+    for (this.rowNumber = 1; this.rowCount >= this.rowNumber; this.rowNumber++) {
       console.log(this.rowNumber);
       this.rowLoopData.push(this.rowNumber);
-      
+
     }
 
-    for(this.columnNumber = 1;this.columnCount>=this.columnNumber;this.columnNumber++) {
+    for (this.columnNumber = 1; this.columnCount >= this.columnNumber; this.columnNumber++) {
       console.log(this.columnNumber);
       this.columnLoopData.push(this.columnNumber);
-      
+
     }
   }
 
@@ -57,20 +56,24 @@ export class AppComponent implements OnInit {
 
     var startIndex = 0;
     this.numberOfElementsToRemove = 0;
-    if(formData.value.indicator === 0){
-      if(formData.value.direction > 0){
+
+    if (formData.value.indicator === 1) {
+      // for column
+      if (formData.value.direction > 0){
         this.numberOfElementsToRemove = this.columnCount - formData.value.direction;
       }
-      if(formData.value.direction < 0){
+      if (formData.value.direction < 0){
         var numberOfElementsToRemove0 = this.columnCount + formData.value.direction;
         this.numberOfElementsToRemove = this.columnCount - numberOfElementsToRemove0;
       }
       var removedData = this.columnLoopData.splice(startIndex, this.numberOfElementsToRemove);
-      for(let getData of removedData) {
+      for (let getData of removedData) {
         this.columnLoopData.push(getData);
       }
-      this.indicatorMsg = "";
-    }else if(formData.value.indicator === 1){
+      this.indicatorMsg = '';
+
+    } else if (formData.value.indicator === 0) {
+      // for row
       if(formData.value.direction > 0){
         this.numberOfElementsToRemove = this.rowCount - formData.value.direction;
       }
@@ -88,5 +91,5 @@ export class AppComponent implements OnInit {
       this.indicatorMsg = "Please enter valid number (1 for col, 0 for row)";
     }
   }
-  
+
 }

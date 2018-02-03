@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Step1</title>
+  <title>Level 2</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,5 +10,82 @@
 </head>
 <body>
   <app-root></app-root>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    function getDatas(row,col) {
+      var data = [];
+      if(col!=''&&col>0){
+        $('.command-table td:nth-child('+col+')').map(function(){
+          return data.push($(this).text());
+        });
+      }
+      if(row!=''&&row>0){
+        $('.command-table tr.selected td').map(function(){
+          return data.push($(this).text());
+        });
+      }
+
+      return data;
+
+    }
+    $(document).on('submit','.main-form2',function(){
+      var index = $('.main-form2 #index').val();
+      var indicator = $('.main-form2 #indicator').val();
+      var direction = $('.main-form2 #direction').val();
+
+      //alert('index: '+index);
+      $('.selected').removeClass('selected');
+      if(indicator==0){
+        // alert('move row');
+        $('.row-'+index).addClass('selected');
+        var oldData = getDatas(index,0);
+        // if(direction<0){
+        //   oldData = oldData.reverse()
+        // }
+        var totalCol = $('.command-table tr.selected td').length;
+        if(direction>0){
+            direction = totalCol-(parseInt(direction));
+        }else{
+          direction = Math.abs(direction);
+        }
+        $('.command-table tr.selected td').each(function(i){
+          var currentText = $(this).text();
+          if(direction>=totalCol){
+            direction = 0;
+          }
+
+          var newText = oldData[direction];
+          $(this).empty().append(newText);
+          direction++;
+        });
+
+      }else if(indicator==1) {
+        alert('move col');
+        $('.column-'+index).addClass('selected');
+        var oldData = getDatas(0,index);
+        // if(direction<0){
+        //   oldData = oldData.reverse()
+        // }
+        var totalCol = $('.command-table .column-'+index).length;
+        if(direction<0){
+            direction = totalCol+(parseInt(direction));
+          }
+        $('.command-table .column-'+index).each(function(i){
+          var currentText = $(this).text();
+          if(direction>=totalCol){
+            direction = 0;
+          }
+
+          var newText = oldData[direction];
+          $(this).empty().append(newText);
+          direction++;
+        });
+      }else {
+
+      }
+    });
+  });
+  </script>
 </body>
 </html>
