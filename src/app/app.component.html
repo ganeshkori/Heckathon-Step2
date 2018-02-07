@@ -30,27 +30,26 @@
             <div *ngIf="indicatorMsg" class="alert alert-danger" role="alert">
                 <strong>Indicator Error :</strong> {{indicatorMsg}}
             </div>
-            <form class="main-form main-form2 command-form"  autocomplete="false" >
-              <!-- <form class="main-form main-form2 command-form" (ngSubmit)="rowColumnCommandForm(rowColumnCommand)" #rowColumnCommand="ngForm"> -->
+            <form class="main-form command-form" #rowColumnCommand="ngForm"  autocomplete="false" >
               <fieldset class="">
                   <legend>Command</legend>
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label for="direction">Direction</label>
-                            <input type="number" class="form-control" name="direction" id="direction" placeholder="Direction">
+                            <input type="number" required ngModel class="form-control" name="direction" id="direction" placeholder="Direction">
                             <small>- (left/down) and + (right/up) of row/col.</small>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="indicator">Indicator</label>
-                            <input type="number" autocomplete="false"  class="form-control" name="indicator" id="indicator" placeholder="Indicator">
+                            <input type="number" required ngModel autocomplete="false"  class="form-control" name="indicator" id="indicator" placeholder="Indicator">
                             <small>(0:row | 1:col)</small>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="index">Index</label>
-                            <input type="number" autocomplete="false" class="form-control" name="index" id="index" placeholder="Index">
+                            <input type="number" required ngModel autocomplete="false" class="form-control" name="index" id="index" placeholder="Index">
                         </div>
                         <div class="col-md-3 add-row-column_action">
-                            <input type="submit" name="" id="" class="btn btn-primary " value="Apply">
+                            <input type="submit" [disabled]="!rowColumnCommand.valid" name="" id="" class="btn btn-primary " value="Apply">
                         </div>
                     </div>
                 </fieldset>

@@ -29,20 +29,15 @@
       return data;
 
     }
-    $(document).on('submit','.main-form2',function(){
-      var index = $('.main-form2 #index').val();
-      var indicator = $('.main-form2 #indicator').val();
-      var direction = $('.main-form2 #direction').val();
+    $(document).on('submit','.command-form',function(){
+      var index = $('.command-form #index').val();
+      var indicator = $('.command-form #indicator').val();
+      var direction = $('.command-form #direction').val();
 
-      //alert('index: '+index);
       $('.selected').removeClass('selected');
       if(indicator==0){
-        // alert('move row');
         $('.row-'+index).addClass('selected');
         var oldData = getDatas(index,0);
-        // if(direction<0){
-        //   oldData = oldData.reverse()
-        // }
         var totalCol = $('.command-table tr.selected td').length;
         if(direction>0){
             direction = totalCol-(parseInt(direction));
@@ -61,12 +56,8 @@
         });
 
       }else if(indicator==1) {
-        alert('move col');
         $('.column-'+index).addClass('selected');
         var oldData = getDatas(0,index);
-        // if(direction<0){
-        //   oldData = oldData.reverse()
-        // }
         var totalCol = $('.command-table .column-'+index).length;
         if(direction<0){
             direction = totalCol+(parseInt(direction));
